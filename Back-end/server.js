@@ -4,9 +4,9 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const Joi = require("joi");
-const connectDB = require("./config/db.js");
-const authRoutes = require("./routes/authRoutes.js");
-const userRoutes = require("./routes/userRoutes.js");
+const connectDB = require("./config/db"); // Ensure this points to the correct file
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // Load environment variables
 dotenv.config();
@@ -26,10 +26,17 @@ if (error) {
 }
 
 // Connect to the database
-connectDB().catch((err) => {
-  console.error("❌ Failed to connect to the database:", err.message);
-  process.exit(1); // Exit if DB connection fails
-});
+const connectToDB = async () => {
+  try {
+    await connectDB(); // Assuming connectDB is async
+    console.log("🚀 Successfully connected to the database");
+  } catch (err) {
+    console.error("❌ Failed to connect to the database:", err.message);
+    process.exit(1); // Exit if DB connection fails
+  }
+};
+
+connectToDB();
 
 const app = express();
 
