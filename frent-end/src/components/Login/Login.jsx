@@ -40,7 +40,7 @@ const validedata = () => {
     e.preventDefault();
     if (validedata()) {
       try {
-        const { data: res } = await axios.post("http://localhost:8999/api/auth", data);
+        const { data: res } = await axios.post("http://localhost:5000/api/auth", data);
         localStorage.setItem("token", res.data);
         window.location = "/";
       } catch (error) {
