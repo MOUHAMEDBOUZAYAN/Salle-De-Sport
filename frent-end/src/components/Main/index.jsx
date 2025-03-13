@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-
 const Main = () => {
 	const handleLogout = () => {
 		localStorage.removeItem("token");
